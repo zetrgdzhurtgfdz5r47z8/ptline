@@ -17,7 +17,7 @@ var setting_avatar = "https://www.morphsuits.com/media/catalog/product/cache/937
 var setting_antiduplicate = false
 
 
-
+var kirkapage = "kirka.io"
 var request = new XMLHttpRequest();
 request.open("POST", setting_webhook);
 // again, replace the url in the open method with yours
